@@ -10,11 +10,15 @@ $server = 'localhost:9999';
 $login = 'root';
 $pass = '';
 $database = 'minecraft';
-$playerids = "7,9,10,11,14,34";
+
+// Comma separated list of playerids representing things like LavaFlow, Creeper, WaterFlow, etc.
+//$playerids = "7,9,10,11,14,34";
+
 $world_table = 'lb-world';
 $player_table = 'lb-players';
-$source_dir = '/home/minecraft/world-big/region';
-$dest_dir = '/home/minecraft/world/region';
+
+$source_dir = '/home/minecraft/world/region';
+$dest_dir = '/home/minecraft/world-small/region';
 
 $db = mysql_connect($server, $login, $pass);
 mysql_select_db($database);
@@ -32,7 +36,7 @@ function selectBlock($x, $z) {
 
     $regionX = floor($chunkX / 32);
     $regionZ = floor($chunkZ / 32);
-  
+	
 	$region = "r.$regionX.$regionZ.mca";
     
     $minChunkX = $regionX * 32;
@@ -85,7 +89,8 @@ while($more_players) {
 		$date = $row[date];
 		$playerid = $row[playerid];
 
-		$playerids .= ','.$playerid;
+		if($playerids) $playerids .= ',';
+		$playerids .= $playerid;
 
 		$r = mysql_query("select * from `$player_table` where playerid = '$playerid'");
 		$row = mysql_fetch_assoc($r);
