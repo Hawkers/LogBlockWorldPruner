@@ -6,7 +6,7 @@
 // Version: 1.0
 // Author: Hawkee (http://twitter.com/Hawkee)
 
-$server = 'localhost:9999';
+$server = 'localhost';
 $login = 'root';
 $pass = '';
 $database = 'minecraft';
@@ -31,23 +31,23 @@ global $regions;
 
 function selectBlock($x, $z) {
 
-    $chunkX = $x >> 4;
-    $chunkZ = $z >> 4;
+	$chunkX = $x >> 4;
+	$chunkZ = $z >> 4;
 
-    $regionX = floor($chunkX / 32);
-    $regionZ = floor($chunkZ / 32);
+	$regionX = floor($chunkX / 32);
+	$regionZ = floor($chunkZ / 32);
 	
 	$region = "r.$regionX.$regionZ.mca";
     
-    $minChunkX = $regionX * 32;
-    $minChunkZ = $regionZ * 32;
-    $maxChunkX = ($regionX + 1) * 32 - 1;
-    $maxChunkZ = ($regionZ + 1) * 32 - 1;
+	$minChunkX = $regionX * 32;
+	$minChunkZ = $regionZ * 32;
+	$maxChunkX = ($regionX + 1) * 32 - 1;
+	$maxChunkZ = ($regionZ + 1) * 32 - 1;
     
-    $minBlockX = $minChunkX << 4;
-    $minBlockZ = $minChunkZ << 4;
-    $maxBlockX = ($maxChunkX + 1 << 4) - 1;
-    $maxBlockZ = ($maxChunkZ + 1 << 4) - 1;
+	$minBlockX = $minChunkX << 4;
+	$minBlockZ = $minChunkZ << 4;
+	$maxBlockX = ($maxChunkX + 1 << 4) - 1;
+	$maxBlockZ = ($maxChunkZ + 1 << 4) - 1;
 	
 	return array($region, $minBlockX, $minBlockZ, $maxBlockX, $maxBlockZ);
 }
